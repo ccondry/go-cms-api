@@ -91,6 +91,9 @@ router.post('/', async (req, res, next) => {
     const message = `Failed to create active directory account for ${req.user.sub}: ${e.message}`
     console.log(message)
     teamsLogger.log(message)
+    teamsLogger.log({
+      markdown: '```json\r\n' + JSON.stringify(req.user, null, 2) + '\r\n```'
+    })
     return res.status(500).send({message: e.message})
   }
 })
