@@ -27,5 +27,7 @@ else
     fi
   else
     echo "failed to pull repo. help me."
+    # reset the repo to main branch on remote
+    git reset --hard origin/main
   fi
 fi
