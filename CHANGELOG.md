@@ -4,6 +4,13 @@ Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
 
+# 2021.2.2
+
+### Features
+* **Debug:** Add debug info for failed LDAP creation, to figure out what to do
+with Cisco accounts that have email addresses for sub username.
+
+
 # 2020.10.26-1
 
 ### Features
