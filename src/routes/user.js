@@ -3,6 +3,7 @@ const router = express.Router()
 const isAdmin = require('../models/is-admin')
 const model = require('../models/user')
 const teamsLogger = require('../models/teams-logger')
+const getHash = require('../models/get-hash')
 
 // make LDAP filter from JSON object
 function jsonToFilter (json) {
@@ -68,8 +69,8 @@ router.post('/', async (req, res, next) => {
       givenName: req.user.given_name,
       sn: req.user.family_name,
       name: fullName, 
-      sAMAccountName: req.user.sub,
-      userPrincipalName: `${req.user.sub}@${process.env.LDAP_DOMAIN}`,
+      sAMAccountName: getHash(req.user.sub),
+      userPrincipalName: `${getHash(req.user.sub)}@${process.env.LDAP_DOMAIN}`,
       cn: fullName,
       displayName: fullName,
       // domain: process.env.LDAP_DOMAIN,
@@ -122,7 +123,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:username', async (req, res, next) => {
   try {
     // authorize client 
-    if (!isAdmin(req.user) && req.params.username !== req.user.sub) {
+    if (!isAdmin(req.user) && req.params.username !== getHash(req.user.sub)) {
       const message = 'This is not your account and you are not an admin.'
       return res.status(403).send({message})
     }
@@ -142,7 +143,7 @@ router.get('/:username', async (req, res, next) => {
 router.post('/:username/password', async (req, res, next) => {
   try {
     // authorize client 
-    if (!isAdmin(req.user) && req.params.username !== req.user.sub) {
+    if (!isAdmin(req.user) && req.params.username !== getHash(req.user.sub)) {
       const message = 'This is not your account and you are not an admin.'
       return res.status(403).send({message})
     }
@@ -229,7 +230,7 @@ router.delete('/:username', async (req, res, next) => {
 router.post('/:username/extend', async (req, res, next) => {
   try {
     // authorize client 
-    if (!isAdmin(req.user) && req.params.username !== req.user.sub) {
+    if (!isAdmin(req.user) && req.params.username !== getHash(req.user.sub)) {
       const message = 'This is not your account and you are not an admin.'
       return res.status(403).send({message})
     }
