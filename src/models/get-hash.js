@@ -1,5 +1,6 @@
 const crypto = require('crypto')
 
+// create hash of user sub, and append it to the first 8 characters of the user sub
 function getHash (sub) {
   const hash = crypto
   .createHash('shake128', {outputLength: 6})
