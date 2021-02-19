@@ -4,6 +4,12 @@ Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
 
+# 2021.2.19
+
+### Features
+* **User:** Create username hash from sub for LDAP usernames
+
+
 # 2021.2.2
 
 ### Features
