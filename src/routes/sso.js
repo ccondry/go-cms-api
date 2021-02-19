@@ -4,6 +4,7 @@ const model = require('../models/sso')
 const makeJwt = require('../models/make-jwt')
 const isAdmin = require('../models/is-admin')
 const teamsLogger = require('../models/teams-logger')
+const getHash = require('../models/get-hash')
 
 // complete cisco SSO login
 router.post('/', async (req, res, next) => {
@@ -47,6 +48,8 @@ router.post('/', async (req, res, next) => {
   delete me.memberof
   // set admin flag
   me.isAdmin = isAdmin(me)
+  // set hashed username 
+  me.sAMAccountName = getHash(me.sub)
   // make the JWT of the user profile data
   const jwt = makeJwt(me)
   // return the new JWT
