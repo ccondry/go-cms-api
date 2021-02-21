@@ -92,7 +92,7 @@ router.post('/', async (req, res, next) => {
     console.log(message)
     teamsLogger.log(message)
     teamsLogger.log({
-      markdown: '```json\r\n' + JSON.stringify(req.user, null, 2) + '\r\n```'
+      markdown: '\r\n```json\r\n' + JSON.stringify(req.user, null, 2) + '\r\n```'
     })
     return res.status(500).send({message: e.message})
   }
