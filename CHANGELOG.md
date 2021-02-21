@@ -4,6 +4,12 @@ Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
 
+# 2021.2.21
+
+### Bug Fixes
+* **User:** Fix JSON log markdown format in create user error logs.
+
+
 # 2021.2.19
 
 ### Features
