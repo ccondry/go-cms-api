@@ -4,6 +4,12 @@ Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
 
+# 2021.3.19
+
+### Features
+* **Logging:** Remove all invalid characters from new LDAP SAMAccount names.
+
+
 # 2021.2.21
 
 ### Bug Fixes
