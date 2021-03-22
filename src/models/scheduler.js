@@ -13,13 +13,15 @@ function isExpired (user) {
   return expiresUtc <= Date.now()
 }
 
+// true if user DLAP expiration is more than deleteAfter days ago
 function shouldDelete (user) {
-  // console.log('should delete', user.sAMAccountName, '?')
+  // get expiration time in UTC ms
   const expiresUtc = (user.accountExpires - 116444736000000000) / 10000
-  const nowUtc = Date.now()
-  const oldestUtc = nowUtc + (deleteAfter * 24 * 60 * 60 * 1000)
-  // console.log('oldestUtc', oldestUtc)
-  return expiresUtc > oldestUtc
+  // calculate the oldest date that the user could have expired and not be
+  // deleted yet
+  const oldestUtc = expiresUtc + (deleteAfter * 24 * 60 * 60 * 1000)
+  // true if user expired more than deleteAfter days ago
+  return oldestUtc >= Date.now()
 }
 
 async function checkExpiredUsers () {
