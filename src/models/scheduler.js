@@ -19,7 +19,7 @@ function shouldDelete (user) {
   const nowUtc = Date.now()
   const oldestUtc = nowUtc + (deleteAfter * 24 * 60 * 60 * 1000)
   // console.log('oldestUtc', oldestUtc)
-  return expiresUtc < oldestUtc
+  return expiresUtc > oldestUtc
 }
 
 async function checkExpiredUsers () {
