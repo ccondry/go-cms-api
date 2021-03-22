@@ -4,6 +4,13 @@ Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
 
+# 2021.3.22
+
+### Bug Fixes
+* **Expired Accounts:** Fix date calculation of when user accounts have expired
+to the point that they should be deleted from LDAP.
+
+
 # 2021.3.19
 
 ### Features
