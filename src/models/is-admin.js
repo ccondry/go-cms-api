@@ -6,5 +6,5 @@ try {
 }
 
 module.exports = function (user) {
-  return admins.includes(user.sub)
+  return admins.includes(user.federated_id)
 }

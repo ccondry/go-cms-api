@@ -24,7 +24,7 @@ const exceptions = {
   }, {
     // cisco SSO
     url: /\/api\/v1\/sso/i,
-    methods: ['POST']
+    methods: ['GET', 'POST']
   }]
 }
 
