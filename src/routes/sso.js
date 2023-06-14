@@ -27,6 +27,7 @@ router.post('/', async (req, res, next) => {
       // redirectUri: req.headers.referer.split('/').slice(0, 3).join('/')
       redirectUri: req.headers.origin + '/'
     }
+    console.log('sso login query params:', req.query)
     const token = await model.authorize(params)
     // console.log('token', token)
     // get user details from Cisco
@@ -44,7 +45,7 @@ router.post('/', async (req, res, next) => {
       return res.status(500).send({message})
     }
   }
-  console.log('me', me)
+  // console.log('me', me)
   // remove memberof, which can be a long list of data
   // delete me.memberof
   // console.log('trimmed me', me)
