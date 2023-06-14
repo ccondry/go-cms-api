@@ -25,7 +25,7 @@ router.post('/', async (req, res, next) => {
       code: req.body.code,
       // redirectUri: req.headers.referer.split('?')[0].split('#')[0]
       // redirectUri: req.headers.referer.split('/').slice(0, 3).join('/')
-      redirectUri: req.headers.origin
+      redirectUri: req.headers.origin + '/'
     }
     console.log('sso authorize req.headers:', req.headers)
     console.log('sso authorize params:', params)
