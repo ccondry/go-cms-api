@@ -21,10 +21,12 @@ router.post('/', async (req, res, next) => {
   let me
   try {
     // authorize oauth2 code and get token
-    const token = await model.authorize({
+    const params = {
       code: req.body.code,
       redirectUri: req.headers.referer.split('?')[0].split('#')[0]
-    })
+    }
+    console.log('sso authorize params:', params)
+    const token = await model.authorize(params)
     // console.log('token', token)
     // get user details from Cisco
     me = await model.verifyOauth2Token(token.id_token)
