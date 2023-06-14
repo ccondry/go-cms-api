@@ -16,11 +16,11 @@ function modUser (user) {
   //   admin = false
   // }
   // append fullName
-  const fullName = user.givenName + ' ' + user.sn
+  // const fullName = user.givenName + ' ' + user.sn
 
   return {
     ...user,
-    fullName,
+    // fullName,
     enabled
   }
 }

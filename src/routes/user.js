@@ -63,22 +63,21 @@ router.post('/', async (req, res, next) => {
       return res.status(500).send({message: e.message})
     }
 
-    const fullName = `${req.user.given_name} ${req.user.family_name}`
     const body = {
-      givenName: req.user.given_name,
-      sn: req.user.family_name,
-      name: fullName, 
+      givenName: req.user.first_name,
+      sn: req.user.last_name,
+      name: req.user.full_name, 
       sAMAccountName: req.user.sAMAccountName,
       userPrincipalName: `${req.user.sAMAccountName}@${process.env.LDAP_DOMAIN}`,
-      cn: fullName,
-      displayName: fullName,
+      cn: req.user.full_name,
+      displayName: req.user.full_name,
       // domain: process.env.LDAP_DOMAIN,
       telephoneNumber: req.body.dn,
       objectClass: ["top", "person", "organizationalPerson", "user"],
       mail: req.user.email,
       description: req.user.email
     }
-    const dn = `CN=${fullName},${process.env.LDAP_BASE_DN}`
+    const dn = `CN=${req.user.full_name},${process.env.LDAP_BASE_DN}`
 
     // create new user in LDAP / AD
     await model.create(dn, body, req.body.password)

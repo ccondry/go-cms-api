@@ -47,18 +47,20 @@ router.post('/', async (req, res, next) => {
   // console.log('trimmed me', me)
   // make the JWT of the user profile data
   try {
-    const jwt = makeJwt({
+    const jwtPayload = {
       // set admin flag
       isAdmin: isAdmin(me),
       // set hashed username 
-      sAMAccountName: getHash(me.sub),
+      sAMAccountName: getHash(me.federated_id),
+      federated_id: me.federated_id,
       email: me.email,
       access_level: me.access_level,
       full_name: me.full_name,
       first_name: me.first_name,
       last_name: me.last_name,
       ccoid: me.ccoid,
-    })
+    }
+    const jwt = makeJwt(jwtPayload)
     // return the new JWT
     return res.status(200).send({jwt})
   } catch (e) {
