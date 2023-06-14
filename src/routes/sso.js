@@ -20,6 +20,10 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   let me
   try {
+    if (!req.body.code || !req.body.code.length) {
+      const message = 'You must include an OAUTH2 code to complete login.'
+      return res.status(400).send({message})
+    }
     // authorize oauth2 code and get token
     const params = {
       code: req.body.code,
