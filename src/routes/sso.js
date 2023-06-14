@@ -27,8 +27,6 @@ router.post('/', async (req, res, next) => {
       // redirectUri: req.headers.referer.split('/').slice(0, 3).join('/')
       redirectUri: req.headers.origin + '/'
     }
-    console.log('sso authorize req.headers:', req.headers)
-    console.log('sso authorize params:', params)
     const token = await model.authorize(params)
     // console.log('token', token)
     // get user details from Cisco
