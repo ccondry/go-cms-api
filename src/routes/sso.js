@@ -23,8 +23,6 @@ router.post('/', async (req, res, next) => {
     // authorize oauth2 code and get token
     const params = {
       code: req.body.code,
-      // redirectUri: req.headers.referer.split('?')[0].split('#')[0]
-      // redirectUri: req.headers.referer.split('/').slice(0, 3).join('/')
       redirectUri: req.headers.origin + '/'
     }
     console.log('sso login query params:', req.query)
