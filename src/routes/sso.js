@@ -25,6 +25,7 @@ router.post('/', async (req, res, next) => {
       code: req.body.code,
       redirectUri: req.headers.referer.split('?')[0].split('#')[0]
     }
+    console.log('sso authorize req.headers:', req.headers)
     console.log('sso authorize params:', params)
     const token = await model.authorize(params)
     // console.log('token', token)
