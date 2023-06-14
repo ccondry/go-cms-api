@@ -29,7 +29,8 @@ router.post('/', async (req, res, next) => {
       code: req.body.code,
       redirectUri: req.headers.origin + '/'
     }
-    console.log('sso login query params:', req.query)
+    console.log('sso login body params:', req.body)
+    console.log('sso auth params:', params)
     const token = await model.authorize(params)
     // console.log('token', token)
     // get user details from Cisco
